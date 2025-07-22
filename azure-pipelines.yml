@@ -1,0 +1,26 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+
+- script: |
+    npm ci
+    npx playwright install --with-deps
+  displayName: 'Install Dependencies'
+
+- script: |
+    npx playwright test --project=API
+  displayName: 'Run API Tests'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'test-results/results.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Playwright API Tests'
