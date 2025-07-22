@@ -39,11 +39,11 @@ docker-compose up --build
 #### Access the Docker Container
 To open a shell inside the running test container:
 ```powershell
-docker exec -it playwright-api-tests-template-api bash
+docker exec -it playwright-api-tests-template-api-1 bash
 ```
 Or for Linux-based containers:
 ```powershell
-docker exec -it playwright-api-tests-template-api /bin/bash
+docker exec -it playwright-api-tests-template-api-1 /bin/bash
 ```
 
 Once inside, you can manually run tests:
