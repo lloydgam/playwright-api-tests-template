@@ -36,6 +36,39 @@ Build and run the API server and tests using Docker Compose:
 docker-compose up --build
 ```
 
+#### Access the Docker Container
+To open a shell inside the running test container:
+```powershell
+docker exec -it playwright-api-tests-template-api bash
+```
+Or for Linux-based containers:
+```powershell
+docker exec -it playwright-api-tests-template-api /bin/bash
+```
+
+Once inside, you can manually run tests:
+```powershell
+npx playwright test
+```
+
+> **Note:** By default, the test container will exit after running tests. This is expected behavior for CI/CD and automated runs.
+
+If you want to keep the test container running for manual inspection or debugging, modify your `docker-compose.yml` to override the command, for example:
+```yaml
+command: ["tail", "-f", "/dev/null"]
+```
+Then you can access the container and run commands interactively.
+
+#### Stop the API Server
+To stop the API server container:
+```powershell
+docker-compose stop api
+```
+Or to stop all containers:
+```powershell
+docker-compose down
+```
+
 ### 5. Azure Pipelines
 See `azure-pipelines.yml` for CI/CD setup. Configure your pipeline in Azure DevOps to automate tests.
 
